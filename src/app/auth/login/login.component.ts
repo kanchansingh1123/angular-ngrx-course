@@ -9,6 +9,7 @@ import { noop } from 'rxjs';
 import { Router } from '@angular/router';
 import { AppState } from '../../reducers';
 import { Login } from '../auth.actions';
+import { AppNotificationService } from '../notification.service';
 
 @Component({
   selector: 'login',
@@ -23,12 +24,12 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
-    private store: Store<AppState>) {
+    private store: Store<AppState>, public notifyService: AppNotificationService) {
     this.form = fb.group({
       email: ['test@angular-university.io', [Validators.required]],
       password: ['test', [Validators.required]]
     });
-
+    
   }
 
   ngOnInit() {
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         (user) => {
+          this.notifyService.showNotification('User LoggedIN Successfully.', '');
           console.log(`User Detail - ${JSON.stringify(user)}`);
         },
         // noop,

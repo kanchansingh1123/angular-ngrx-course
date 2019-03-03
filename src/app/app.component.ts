@@ -5,6 +5,7 @@ import { AppState } from './reducers/index';
 import { Logout } from './auth/auth.actions';
 import { map } from 'rxjs/operators';
 import { isLoggedIn, isLoggedOut} from './auth/auth.selectors';
+import { AppNotificationService } from './auth/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
 
   isLoggedOut$: Observable<boolean>;
 
-    constructor(private store: Store<AppState>) {
+    constructor(private store: Store<AppState>, public notifyService: AppNotificationService) {
 
     }
 
@@ -40,6 +41,8 @@ export class AppComponent implements OnInit {
         .pipe(
           select(isLoggedOut)
         );
+
+     // this.notifyService.showNotification('Error: User does not exit.', '');
     }
 
     logout() {

@@ -2,7 +2,7 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
 import {MatCardModule} from "@angular/material/card";
-import {MatInputModule} from "@angular/material";
+import {MatInputModule, MatSnackBarModule} from "@angular/material";
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
@@ -18,6 +18,7 @@ import * as fromAuth from './auth.reducer';
         MatCardModule,
         MatInputModule,
         MatButtonModule,
+        MatSnackBarModule,
         RouterModule.forChild([{path: '', component: LoginComponent}]),
         StoreModule.forFeature('auth', fromAuth.AuthReducer),
 
