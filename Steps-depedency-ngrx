@@ -45,15 +45,32 @@ Docs URL - https://github.com/ngrx/platform/tree/master/docs
 8) reducer - Take the current state of the application and return the new state based on the action.
 
 
-------------- Doing development using ng schematics ------------------
+------------- Doing development using ng schematics and feature module ------------------
 
 1) Generating the reducer for auth module.
 
-	ng generate reducer Auth --flat=flase --module auth/auth.module.ts
+	ng generate reducer Auth --flat=false --module auth/auth.module.ts
 
 	Auth - Reducer filename
 	--flat=flase -> avoid generating new folder.
-	
+
+2) Consuming the store using ngrx selectors.
+
+	2.1) Normal way is - we can subscribe the store as we did in login page.
+
+	2.2) We can use selector to extract the data in the better way.
+
+	Selector is a function which takes sy=tate as input and slice the output.
+
+	Using selector we can avoid the code execution each time in subscription to save the memory and increase the performance. 
+	It will only get executed when the value of it gets changed from last stored value.
+
+
+
+
+
+
+
 
 
 
