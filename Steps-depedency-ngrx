@@ -1,0 +1,64 @@
+Note:  After the service call only we can set the state.
+
+Steps - 
+
+1) Install the dependency in app from - 
+
+	dependencies: 
+		"@ngrx/effects": "^7.0.0",
+	    "@ngrx/entity": "^7.0.0",
+	    "@ngrx/router-store": "^7.0.0",
+	    "@ngrx/store": "^7.0.0",
+	    "@ngrx/store-devtools": "^7.0.0",
+	    "ngrx-store-freeze": "^0.2.1",
+
+	 devDependencies: 
+
+	 	"@ngrx/schematics": "^7.0.0", - extension for Angular CLI, this allow quickly scaffolding code for reducer, action or entity.
+
+Docs URL - https://github.com/ngrx/platform/tree/master/docs
+
+2) Set Schematics - 
+
+	ng config cli.defaultCollection @ngrx/schematics
+
+3) At application level store - 
+
+	ng generate store AppState --root --module app.module.ts
+
+	Above command will generate the reducer folder and will modify the app.module.ts and will add the following entry - 
+
+	StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+
+
+4) Action schematics - 
+
+	ng generate action auth/Auth - this will generate the auth.action inside the auth folder.
+
+5) Error handler in .subscripe or in Web Socket service.
+
+6) To add the extension we need search for - 'redux' in chrome web store. Add the extension for Redux Dev Tool.
+
+7) We can see the redux icon at top right or by clicking on the inspect and find Redux.
+
+8) reducer - Take the current state of the application and return the new state based on the action.
+
+
+------------- Doing development using ng schematics ------------------
+
+1) Generating the reducer for auth module.
+
+	ng generate reducer Auth --flat=flase --module auth/auth.module.ts
+
+	Auth - Reducer filename
+	--flat=flase -> avoid generating new folder.
+	
+
+
+
+
+
+
+
+
