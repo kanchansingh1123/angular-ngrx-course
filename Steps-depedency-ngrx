@@ -67,7 +67,84 @@ Docs URL - https://github.com/ngrx/platform/tree/master/docs
 
 
 
+-------- Effect is to handle the store side effects. ------------
 
+
+Saving the data into the localstorage/cookies for reload purpose is an example.
+
+Side effect is basicall synchronizing the in memory data with the database.
+
+Note : In case of login - Login can happened in multiple ways (using social media) so we need to execute the dispatch event of the store. So we need a service or Effect service to make it centralized.
+
+Steps - 
+
+	1) Create a service - ng generate effect auth/Auth --module auth/auth.module.ts
+
+	auth.effect.ts
+
+	$action observable will be emitting every time when an action gets dispatched.
+
+	2) Take the code from Repo.
+
+	3) Add the Effect in root module also with blank [].
+
+		EffectsModule.forRoot([]);
+
+
+
+--------- Store Freez -------------- dev dependency
+
+This is to make sure that we do write our store reducer correctly at the time of the development.
+
+This means that any action in the reducer should not mutate the state. All the reducer functions are pure function which takes a state as input and return the new state.
+
+We can modify the store state directy but later it will create and issue, specially when use onpush change detection strategy.
+
+ngrx store freez is a metareducer ( special type of reducer which gets executed after the main reducers). It take the store state as input and freez the each javascript property recursively by making them read only, it also prevents to adding new property to the object.
+
+
+---------- Later to do : Video 22(4th Lesson) -------
+
+----------- router store package------- @ngrx/router-store ---- This is not must implementation as this is for debuggin tool purpose ----
+
+This is for time travel debugging.
+
+Say when we change the routing and store state gets changed. So If we change the routing from browser navigation store state doesn't change.
+
+To fix this we need @ngrx/router-store.
+
+steps ---
+
+	1) install the module.
+
+	2) Add it into the root module - StoreRouterConnectingModule.forRoot(stateKey: 'router')
+
+	Note: We don't need to store all the state of route params. It can be used for storing the queryparams and paramters.
+
+	In order to make sure we do not store all the route state tree, we need to install "Custom Router Store"
+
+	https://github.com/ngrx/platform/tree/master/docs/router-store
+
+	https://github.com/ngrx/platform/blob/master/docs/router-store/api.md#custom-router-state-serializer
+
+	This will make sure to store small amount of the state in the router tree.
+
+	find the code under the shared/utils.ts in the repo.
+
+	3) Now configure the code into the module - 
+
+	copy the providers code and add into the out root module providers. (See the code from repo or above URL)
+
+
+	4) Add the router property into the root reducer - 
+
+	export const reducers: ActionReducerMap<AppState> = {
+		router: routerReducer // this line
+	}
+
+
+
+------- @ngrx entity - for course module ----------
 
 
 
